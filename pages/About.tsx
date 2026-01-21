@@ -15,7 +15,7 @@ const About: React.FC<AboutProps> = ({ id }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <span className="text-accent font-bold tracking-widest uppercase text-sm mb-2 block">L'Entreprise</span>
-          <h2 className="font-heading font-bold text-4xl md:text-5xl text-dark mb-4">À Propos de Galvatech</h2>
+          <h2 className="font-heading font-bold text-4xl md:text-5xl text-dark mb-4">À Propos de GALVATECH</h2>
            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
             La science de la surface et la précision suisse depuis 1999.
           </p>
@@ -25,21 +25,21 @@ const About: React.FC<AboutProps> = ({ id }) => {
           <div className="prose prose-lg text-gray-600">
              <h3 className="text-2xl font-bold text-primary mb-4">Notre Histoire</h3>
              <p className="mb-4">
-               Fondée à La Chaux-de-Fonds, au cœur de la région horlogère suisse, Galvatech a bâti sa réputation sur la maîtrise du traitement galvanique et du traitement chimique de métaux.
+               Fondée à La Chaux-de-Fonds, au cœur de la région horlogère suisse, GALVATECH a bâti sa réputation sur la maîtrise du traitement galvanique et du traitement chimique de métaux.
              </p>
              <p className="mb-4">
                Notre équipe d'experts en chimie, métallurgie et procédés industriels met en œuvre des solutions sur mesure adaptées à chaque matériau et à chaque exigence. Nous ajustons les paramètres électrochimiques et chimiques afin de garantir des résultats constants.
              </p>
              <p>
-               Galvatech associe innovation et exigence suisse pour offrir à ses clients des surfaces parfaites jusque dans le micron.
+               GALVATECH associe innovation et exigence suisse pour offrir à ses clients des surfaces parfaites jusque dans le micron.
              </p>
           </div>
           
           <div className="relative group">
              <div className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-2xl opacity-75 blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
              <img 
-               src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80" 
-               alt="Laboratoire Galvatech" 
+               src="img/polissage.png" 
+               alt="Laboratoire GALVATECH" 
                className="relative rounded-2xl shadow-2xl w-full object-cover h-[400px]"
              />
              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg border-l-4 border-accent max-w-xs hidden md:block">

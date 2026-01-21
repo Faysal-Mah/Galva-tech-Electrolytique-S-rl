@@ -14,7 +14,7 @@ const Quality: React.FC<QualityProps> = ({ id }) => {
           <span className="text-accent font-bold tracking-widest uppercase text-sm mb-2 block">Engagement</span>
           <h2 className="font-heading font-bold text-4xl md:text-5xl text-dark mb-4">Qualité et Environnement</h2>
           <p className="text-xl text-gray-500 max-w-3xl mx-auto">
-            Chez Galvatech, la qualité est une culture. Nous associons performance industrielle et responsabilité écologique.
+            Chez GALVATECH, la qualité est une culture. Nous associons performance industrielle et responsabilité écologique.
           </p>
       </div>
 
@@ -71,7 +71,7 @@ const Quality: React.FC<QualityProps> = ({ id }) => {
                   Nos installations respectent les réglementations suisses et européennes, notamment <strong>REACH</strong> et <strong>ROHS</strong>.
                 </p>
                 <p>
-                  Nous réduisons la consommation d'eau et d'énergie, recyclons les métaux et prolongeons la durée de vie de nos bains de traitement chimique. Galvatech s'engage pour une industrie plus propre, durable et responsable.
+                  Nous réduisons la consommation d'eau et d'énergie, recyclons les métaux et prolongeons la durée de vie de nos bains de traitement chimique. GALVATECH s'engage pour une industrie plus propre, durable et responsable.
                 </p>
               </div>
 

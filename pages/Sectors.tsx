@@ -13,7 +13,7 @@ const Sectors: React.FC<SectorsProps> = ({ id }) => {
            <span className="text-accent font-bold tracking-widest uppercase text-sm mb-3 block">Industries</span>
           <h2 className="font-heading font-bold text-4xl md:text-5xl text-dark mb-6">Secteurs d'Activité</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Galvatech intervient dans les industries où la qualité de surface et la précision ne tolèrent aucun compromis.
+            GALVATECH intervient dans les industries où la qualité de surface et la précision ne tolèrent aucun compromis.
           </p>
         </div>
       </div>

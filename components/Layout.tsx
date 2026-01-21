@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
-import { NAV_ITEMS, COMPANY_DETAILS } from '../constants';
+import { NAV_ITEMS, COMPANY_DETAILS, SERVICES } from '../constants';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,26 +37,19 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-24 items-center">
           {/* Logo */}
-          <div className="flex-shrink-0 cursor-pointer h-full py-2" onClick={() => handleNav('#home')}>
+          <div className="flex-shrink-0 cursor-pointer h-full py-2 flex items-center gap-3" onClick={() => handleNav('#home')}>
             <img 
-              src="/galvatech-logo.png" 
-              alt="Galvatech Logo" 
+              src="img/galvatech-logo.png" 
+              alt="GALVATECH Logo" 
               className="h-full w-auto object-contain"
               onError={(e) => {
-                // Fallback if image not found
                 e.currentTarget.style.display = 'none';
-                e.currentTarget.nextElementSibling?.classList.remove('hidden');
               }}
             />
-            {/* Fallback Text Logo */}
-            <div className="hidden flex items-center gap-2 h-full">
-               <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                G
-              </div>
-              <span className="font-heading font-bold text-2xl text-primary tracking-tight">
+            {/* Modification: text-primary remplacé par text-secondary pour un bleu plus clair */}
+            <span className="font-heading font-bold text-2xl text-secondary tracking-tight">
                 GALVATECH
-              </span>
-            </div>
+            </span>
           </div>
 
           {/* Desktop Menu */}
@@ -140,6 +133,12 @@ const Footer: React.FC = () => {
           {/* About Column */}
           <div>
             <div className="flex items-center gap-2 mb-6">
+              <img 
+                src="img/galvatech-logo.png" 
+                alt="GALVATECH" 
+                className="h-12 w-12 bg-white rounded-full object-contain p-0.5"
+                onError={(e) => e.currentTarget.style.display = 'none'}
+              />
               <span className="font-heading font-bold text-xl tracking-tight text-white">
                 GALVATECH
               </span>
@@ -168,18 +167,16 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-heading font-bold mb-6 text-accent">Services</h3>
             <ul className="space-y-3">
-              <li>
-                <button onClick={() => scrollTo('#services')} className="text-gray-300 hover:text-white transition-colors text-sm text-left">Zingage électrolytique</button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('#services')} className="text-gray-300 hover:text-white transition-colors text-sm text-left">Polissage inox</button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('#services')} className="text-gray-300 hover:text-white transition-colors text-sm text-left">Passivation</button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('#services')} className="text-gray-300 hover:text-white transition-colors text-sm text-left">Nettoyage technique</button>
-              </li>
+              {SERVICES.map((service) => (
+                <li key={service.id}>
+                  <button 
+                    onClick={() => scrollTo('#services')} 
+                    className="text-gray-300 hover:text-white transition-colors text-sm text-left hover:translate-x-1 transform duration-200"
+                  >
+                    {service.title}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -204,7 +201,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
-          <p>© {new Date().getFullYear()} Galvatech SA - Tous droits réservés</p>
+          <p>© {new Date().getFullYear()} GALVATECH SA - Tous droits réservés</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <span className="hover:text-white cursor-pointer transition-colors">Mentions légales</span>
             <span className="hover:text-white cursor-pointer transition-colors">Politique de confidentialité</span>
@@ -215,22 +212,18 @@ const Footer: React.FC = () => {
   );
 };
 
-const WhatsAppButton: React.FC = () => {
-  // Format: Country code + Number without leading 0 or spaces
-  // 032 968 15 42 -> 41329681542
-  const phoneNumber = "41329681542"; 
+const CallButton: React.FC = () => {
+  const phoneNumber = "+41329681542"; 
   
   return (
     <a
-      href={`https://wa.me/${phoneNumber}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center group border-2 border-white/20"
-      aria-label="Contacter sur WhatsApp"
+      href={`tel:${phoneNumber}`}
+      className="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center group border-2 border-white/20"
+      aria-label="Appeler GALVATECH"
     >
-      <MessageCircle size={32} fill="white" className="text-white" />
+      <Phone size={28} className="text-white fill-current" />
       <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-500 ease-in-out whitespace-nowrap font-bold text-lg">
-        WhatsApp
+        Appeler
       </span>
     </a>
   );
@@ -244,7 +237,7 @@ const Layout: React.FC<{children: React.ReactNode}> = ({ children }) => {
         {children}
       </main>
       <Footer />
-      <WhatsAppButton />
+      <CallButton />
     </div>
   );
 };

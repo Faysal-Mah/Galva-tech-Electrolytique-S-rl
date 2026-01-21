@@ -25,53 +25,53 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const SERVICES: ServiceData[] = [
   {
-    id: 'zingage',
-    title: 'Zingage électrolytique',
-    description: "Dépôt homogène de zinc sur acier, inox ou laiton par procédé électrolytique. Ce traitement galvanique assure une excellente protection contre la corrosion tout en offrant un rendu esthétique régulier. Idéal pour les pièces de précision.",
+    id: 'ebavurage',
+    title: 'L’ébavurage chimique et électrolytique',
+    description: "L’ébavurage chimique et l’ébavurage électrolytique sont des procédés de finition de haute précision par dissolution contrôlée de la matière. Le premier assure un traitement homogène des pièces complexes, tandis que le second permet un ébavurage très localisé et précis, sans contrainte thermique ni mécanique, répondant aux exigences des applications industrielles les plus sensibles.",
     icon: Droplets,
-    imageUrl: "https://images.unsplash.com/photo-1535813547-99c4f3a69772?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/ebavurage.png"
   },
   {
     id: 'passivation',
     title: 'La passivation',
     description: "C’est un traitement chimique, réalisé par immersion dans une solution oxydante ou un mince film d’oxyde protecteur est déposé sur la surface du produit traité. Ce film présente un haut degré de pureté et protège le substrat contre la corrosion. La passivation ne modifie ni les dimensions, ni la morphologie de la surface produit.",
     icon: ShieldCheck,
-    imageUrl: "https://images.unsplash.com/photo-1623835634598-a6207198a2eb?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/passivation.png"
   },
   {
     id: 'polissage',
     title: 'Le polissage électrolytique',
     description: "C’est un procédé qui permet de donner à la surface de la pièce un aspect clair et brillant tout en éliminant ces impuretés. On obtient une surface plus lisse par diminution de la rugosité et une bonne résistance à la corrosion.",
     icon: Sparkles,
-    imageUrl: "https://images.unsplash.com/photo-1622359560447-0d321151641b?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/polissage.png"
   },
   {
     id: 'decapage',
     title: 'Le décapage chimique',
     description: "C’est un traitement qui permet de dissoudre les impuretés et les défauts de surface engendrés par des opérations de fabrication (usinage, gravure, pliage, soudage). Il est également utilisé comme préparation de surface avant le microbillage ou le polissage électrolytique afin de travailler sur un matériau sain et décontaminé. Cette opération est systématiquement suivie par une passivation.",
     icon: FlaskConical,
-    imageUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/decapage.png"
   },
   {
     id: 'tribofinition',
     title: 'La tribofinition',
     description: "Appelé aussi la trovalisation est une opération qui consiste à ébavurer et à polir la surface et les arêtes des pièces en supprimant les défauts de surfaces. Elle permet d’obtenir une surface qui procure au produit une meilleure finition et des performances mécaniques élevés. Une passivation est indispensable après la tribofinition afin d’éliminer le dépôt du mélange abrasif incrusté dans la matière.",
     icon: Orbit,
-    imageUrl: "https://images.unsplash.com/photo-1627814407886-f138865c1926?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/tribofinition.png"
   },
   {
     id: 'decontamination',
-    title: 'La décontamination électrolytique',
-    description: "C’est un traitement réalisé par électrolyse qui consiste à plonger des pièces dans un bain d’acide et à leur imposer une polarisation anodique et/ou cathodique. Ce procédé permet d’accélérer l’opération de décapage en provoquant l’attaque de l’oxyde par de l’acide naissant, plus actif que l’acide en solution.",
+    title: 'Décontamination Chimique et Électrolytique : Une Pureté Certifiée',
+    description: "Ce procédé élimine radicalement les impuretés et résidus d'usinage pour garantir une surface parfaitement saine. L'action combinée de l'immersion chimique et de l'électrolyse purifie les métaux en profondeur, assurant une résistance maximale à la corrosion et une passivité durable des composants les plus sensibles.",
     icon: Zap,
-    imageUrl: "https://images.unsplash.com/photo-1605517457723-6902257d077e?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/decontamination.png"
   },
   {
     id: 'sablage',
-    title: 'Le sablage',
-    description: "C’est une opération qui consiste à projeter des microbilles de verres sur une surface dans le but de la décaper légèrement. Elle est utilisée pour le nettoyage et le décapage des pièces ou pour réaliser une finition esthétique (aspect granuleux). C’est opération est généralement suivie par un décapage dans le but d’éliminer les microbilles de verre qui s’incrustent dans la pièce.",
+    title: 'Sablage Mécanique et Chimique : L’Excellence des Finitions',
+    description: "Le sablage mécanique et le sablage chimique sont des procédés essentiels pour la préparation et l'esthétique des surfaces de précision. Le premier utilise la projection d'abrasifs pour uniformiser la matière et créer une accroche technique idéale. Le second, par immersion, assure un satinage d'une régularité absolue sur les pièces complexes ou fragiles. Ces technologies complémentaires garantissent des finitions haut de gamme, alliant durabilité et élégance visuelle pour les composants les plus exigeants.",
     icon: Wind,
-    imageUrl: "https://images.unsplash.com/photo-1618386377755-a043c7c25052?auto=format&fit=crop&w=800&q=80"
+    imageUrl: "img/sablage.png"
   }
 ];
 
@@ -81,28 +81,28 @@ export const SECTORS: SectorData[] = [
     title: 'Horlogerie',
     description: "Les finitions métalliques pour boîtiers, bracelets et cadrans exigent une maîtrise totale. Nos procédés garantissent une brillance durable.",
     icon: Watch,
-    imageUrl: "https://images.unsplash.com/photo-1612178382877-3e8e78e6a27e?auto=format&fit=crop&w=600&q=80"
+    imageUrl: "img/Horlogerie.png"
   },
   {
     id: 'medical',
     title: 'Médical et dentaire',
     description: "Nos traitements répondent aux exigences de biocompatibilité pour vis, implants, prothèses et instruments chirurgicaux.",
     icon: Activity,
-    imageUrl: "https://images.unsplash.com/photo-1584036561566-b93a901668d7?auto=format&fit=crop&w=600&q=80"
+    imageUrl: "img/Medical.png"
   },
   {
     id: 'aeronautique',
     title: 'Aéronautique',
     description: "Amélioration de la résistance à la fatigue et à la corrosion pour des pièces respectant les tolérances les plus strictes.",
     icon: Plane,
-    imageUrl: "https://images.unsplash.com/photo-1559627755-e87f877f259d?auto=format&fit=crop&w=600&q=80"
+    imageUrl: "img/Aeronautique.png"
   },
   {
     id: 'microtechnique',
     title: 'Microtechnique',
     description: "Solutions pour pièces miniaturisées et composants conducteurs avec un contrôle de dépôt précis à l'échelle micrométrique.",
     icon: Cpu,
-    imageUrl: "https://images.unsplash.com/photo-1555664424-778a69022365?auto=format&fit=crop&w=600&q=80"
+    imageUrl: "img/Microtechnique.png"
   }
 ];
 

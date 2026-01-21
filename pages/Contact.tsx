@@ -1,5 +1,5 @@
-import React from 'react';
-import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, Mail, MapPin, Clock, Send, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { COMPANY_DETAILS, SECTORS } from '../constants';
 
 interface ContactProps {
@@ -7,6 +7,62 @@ interface ContactProps {
 }
 
 const Contact: React.FC<ContactProps> = ({ id }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget; // Stockage de la référence du formulaire avant l'async
+    setIsSubmitting(true);
+    setStatus(null);
+
+    const formData = new FormData(form);
+
+    // Préparation du contenu complet pour le devis technique
+    const secteur = formData.get('secteur') || 'Non spécifié';
+    const message = formData.get('message') || '';
+    
+    // Construction du champ contenu_complet demandé par le script PHP
+    const contenuComplet = `Secteur d'activité: ${secteur}\n\nMessage:\n${message}`;
+    formData.append('contenu_complet', contenuComplet);
+
+    // Ajout des champs d'adresse vides si non présents (pour éviter des erreurs PHP si le script les attend strictement)
+    if (!formData.has('rue')) formData.append('rue', '');
+    if (!formData.has('numero')) formData.append('numero', '');
+    if (!formData.has('ville')) formData.append('ville', '');
+
+    try {
+      const response = await fetch('https://v2.galva-tech.ch/contact.php', {
+        method: 'POST',
+        mode: 'cors',
+        body: formData, // Pas de Content-Type manuel avec FormData
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        form.reset();
+        setStatus({ 
+          type: 'success', 
+          text: 'Votre demande a bien été envoyée. Nos équipes vous répondront dans les plus brefs délais.' 
+        });
+      } else {
+        setStatus({ 
+          type: 'error', 
+          text: result.message || 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.' 
+        });
+      }
+    } catch (error) {
+      console.error('Erreur réseau:', error);
+      setStatus({ 
+        type: 'error', 
+        text: 'Impossible de contacter le serveur. Veuillez vérifier votre connexion ou nous appeler directement.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id={id} className="bg-neutral py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
@@ -23,30 +79,47 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
           {/* Form Section */}
           <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border-t-4 border-accent">
             <h3 className="text-2xl font-bold text-dark mb-6">Demande d'offre sans obligation</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            
+            {status && (
+              <div className={`mb-6 p-4 rounded-lg flex items-start ${status.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                {status.type === 'success' ? <CheckCircle className="mr-3 flex-shrink-0" size={20} /> : <AlertCircle className="mr-3 flex-shrink-0" size={20} />}
+                <span>{status.text}</span>
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
+               {/* Honeypot field - Anti-spam */}
+               <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-                     <input type="text" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="Jean Dupont" />
+                     <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1">Nom complet *</label>
+                     <input required name="nom" id="nom" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="Jean Dupont" />
                   </div>
                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                     <input type="tel" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="+41 79 ..." />
+                     <label htmlFor="entreprise" className="block text-sm font-medium text-gray-700 mb-1">Entreprise</label>
+                     <input name="entreprise" id="entreprise" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="Nom de votre société" />
                   </div>
                </div>
-               
-               <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input type="email" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="jean@entreprise.ch" />
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                      <input required name="email" id="email" type="email" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="jean@entreprise.ch" />
+                  </div>
+                  <div>
+                     <label htmlFor="tel" className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
+                     <input name="tel" id="tel" type="tel" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="+41 32 ..." />
+                  </div>
                </div>
 
                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Secteur d'activité</label>
+                  <label htmlFor="secteur" className="block text-sm font-medium text-gray-700 mb-1">Secteur d'activité</label>
                   <div className="relative">
-                     <select className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors appearance-none cursor-pointer">
+                     <select name="secteur" id="secteur" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors appearance-none cursor-pointer">
                         <option value="">Sélectionner un secteur</option>
-                        {SECTORS.map(s => <option key={s.id} value={s.id}>{s.title}</option>)}
-                        <option value="autre">Autre</option>
+                        {SECTORS.map(s => <option key={s.id} value={s.title}>{s.title}</option>)}
+                        <option value="Autre">Autre</option>
                      </select>
                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -55,13 +128,26 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                </div>
 
                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <textarea rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="Détails de votre demande..."></textarea>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                  <textarea required name="message" id="message" rows={4} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-colors" placeholder="Détails de votre demande..."></textarea>
                </div>
 
-               <button type="submit" className="w-full bg-primary hover:bg-secondary text-white font-bold py-4 rounded-lg transition-colors shadow-md flex items-center justify-center group">
-                  <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={20} />
-                  Envoyer ma demande
+               <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-secondary disabled:bg-gray-400 text-white font-bold py-4 rounded-lg transition-colors shadow-md flex items-center justify-center group"
+               >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 animate-spin" size={20} />
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={20} />
+                      Envoyer ma demande
+                    </>
+                  )}
                </button>
             </form>
           </div>
@@ -113,7 +199,7 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
              {/* Map Placeholder */}
              <div className="bg-gray-200 rounded-2xl h-64 w-full overflow-hidden relative shadow-md group">
                 <img 
-                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" 
+                  src="img/La-Chaux-de-Fonds-1927-1.jpg" 
                   alt="Carte localisation" 
                   className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-80 transition-opacity duration-500"
                 />

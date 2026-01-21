@@ -20,7 +20,7 @@ const Home: React.FC<HomeProps> = ({ id }) => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/hero-bg.jpg" 
+          src="img/La-Chaux-de-Fonds-1927-1.jpg" 
           alt="Vue aérienne La Chaux-de-Fonds" 
           className="w-full h-full object-cover"
           onError={(e) => {
@@ -36,10 +36,10 @@ const Home: React.FC<HomeProps> = ({ id }) => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white mt-10">
         <div className="max-w-4xl animate-fade-in-up">
           <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-7xl leading-tight mb-8 drop-shadow-lg">
-            Galvatech, l'expertise suisse du traitement de surface <span className="text-accent">haute précision</span>.
+            GALVATECH, l'expertise suisse du traitement de surface <span className="text-accent">haute précision</span>.
           </h1>
           <p className="text-xl md:text-2xl font-light text-gray-100 mb-10 border-l-4 border-accent pl-6 bg-black/10 py-2 backdrop-blur-sm">
-            Zingage électrolytique • Polissage inox • Traitement chimique
+            Ébavurage de précision • Polissage électrolytique • Décontamination
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
