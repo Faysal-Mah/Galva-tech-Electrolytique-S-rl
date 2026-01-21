@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronRight, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Menu, X, ChevronRight, Phone, Mail, MapPin, MessageCircle, ArrowUp } from 'lucide-react';
 import { NAV_ITEMS, COMPANY_DETAILS, SERVICES } from '../constants';
 
 const Navbar: React.FC = () => {
@@ -212,6 +212,44 @@ const Footer: React.FC = () => {
   );
 };
 
+const ScrollToTop: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-28 right-6 z-40 bg-white/90 backdrop-blur hover:bg-white text-primary p-3 rounded-full shadow-lg border-2 border-primary/10 transition-all duration-300 hover:scale-110 hover:-translate-y-1 group"
+          aria-label="Retour en haut"
+        >
+          <ArrowUp size={24} className="group-hover:text-accent transition-colors" />
+        </button>
+      )}
+    </>
+  );
+};
+
 const CallButton: React.FC = () => {
   const phoneNumber = "+41329681542"; 
   
@@ -237,6 +275,7 @@ const Layout: React.FC<{children: React.ReactNode}> = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <ScrollToTop />
       <CallButton />
     </div>
   );

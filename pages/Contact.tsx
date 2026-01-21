@@ -32,7 +32,8 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
     if (!formData.has('ville')) formData.append('ville', '');
 
     try {
-      const response = await fetch('https://v2.galva-tech.ch/contact.php', {
+      // Modification de l'URL pour pointer vers le nouveau domaine
+      const response = await fetch('https://galva-tech.com/contact.php', {
         method: 'POST',
         mode: 'cors',
         body: formData, // Pas de Content-Type manuel avec FormData

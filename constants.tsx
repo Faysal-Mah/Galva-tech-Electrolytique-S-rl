@@ -126,6 +126,6 @@ export const COMMITMENTS: Commitment[] = [
 export const COMPANY_DETAILS = {
   address: "Rue Alexis-Marie-Piaget 73, 2300 La Chaux-de-Fonds, Suisse",
   phone: "032 968 15 42",
-  email: "galvatech@bluewin.ch",
+  email: "faysal.m.mah@gmail.com",
   hours: "Lun-Ven: 07:30 - 12:00 / 13:30 - 17:00"
 };
